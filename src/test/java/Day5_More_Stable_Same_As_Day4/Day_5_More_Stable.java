@@ -1,18 +1,18 @@
-package Day4_Follow_DirectMessage;
+package Day5_More_Stable_Same_As_Day4;
 
 import Utilities.WebDriverFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class Day_4_Enter_UserName_Password {
+public class Day_5_More_Stable {
+
 
     WebDriver driver;
     String username = "cilekcicocuk" ;
@@ -86,10 +86,11 @@ public class Day_4_Enter_UserName_Password {
         Thread.sleep(500);
         driver.findElement(By.cssSelector("button[class='sqdOP  L3NKy   y3zKF     ']")).click(); // Click "Send Message" button
         Thread.sleep(500);
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         for ( int i=1; i<k ; i++ ) {
-            driver.findElement(By.cssSelector("input[name='queryBox']")).sendKeys(listOfAccounts.get(i-1) + Keys.ENTER); //Search Account
-            Thread.sleep(800);
+            WebElement SearchAccount = driver.findElement(By.cssSelector("input[name='queryBox']")); //Search Account
+            SearchAccount.sendKeys(listOfAccounts.get(i-1) + Keys.ENTER);
+            Thread.sleep(1500);
             driver.findElement(By.cssSelector("button[class='dCJp8 ']")).click(); // Select the account
             Thread.sleep(500);
             driver.findElement(By.cssSelector("button[class='sqdOP yWX7d    y3zKF   cB_4K  ']")).click(); // Click "Next" Button
@@ -99,7 +100,7 @@ public class Day_4_Enter_UserName_Password {
             driver.navigate().back(); // Come Back
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         }
-
+        driver.navigate().back();
     }
 
     //@AfterClass
