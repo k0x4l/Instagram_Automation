@@ -1,4 +1,4 @@
-package Day5_More_Stable_Same_As_Day4;
+package Day6_AtHomePageSuggestions;
 
 import Utilities.WebDriverFactory;
 import org.openqa.selenium.By;
@@ -11,8 +11,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class Day_5_More_Stable {
-
+public class Day_6_At_Home_Page_Suggestions_to_Follow {
 
     WebDriver driver;
     String username = "cilekcicocuk" ;
@@ -30,10 +29,10 @@ public class Day_5_More_Stable {
         driver.get("https://www.instagram.com/accounts/login/");
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    @Test (priority = 1)
+    @Test(priority = 1)
     public void validUserCredentials()throws InterruptedException{
         driver.findElement(By.name("username")).sendKeys(username);
         driver.findElement(By.name("password")).sendKeys(password+ Keys.ENTER);
@@ -47,30 +46,20 @@ public class Day_5_More_Stable {
         driver.findElement(By.cssSelector("button[class='aOOlW   HoLwm ']")).click();
         driver.manage().timeouts().implicitlyWait(4,TimeUnit.SECONDS);
     }
-    //@Test (priority = 3)
-    public void Follow_5_Account(){
-        for(int i=0; i<2 ; i++) {
-            for ( int z=0 ; z<5 ; z++ ) {
-                driver.manage().timeouts().implicitlyWait(3,TimeUnit.SECONDS);
-                driver.findElement(By.cssSelector("button[class='PoNcp sqdOP yWX7d    y3zKF     ']")).click();
-                driver.manage().timeouts().implicitlyWait(1,TimeUnit.SECONDS);
-            }
-            driver.navigate().refresh();
-        }
-    }
-    //@Test (priority = 3)
-    public void goToExplore(){
-        driver.findElement(By.cssSelector("svg[aria-label='Find People']")).click();
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
-    }
-    //@Test (priority = 4)
-    public void seeAll() throws InterruptedException{
+
+    @Test (priority = 3)
+    public void See_All_Suggestions()throws InterruptedException{
         Thread.sleep(4000);
-        driver.findElement(By.cssSelector("//div[.='See All']")).click(); //Click "seeAll" button
+        WebElement SeeAllButton = driver.findElement(By.xpath("//div[@class='_7UhW9  PIoXz        qyrsm KV-D4         uL8Hv         ']"));
+        SeeAllButton.click();
         Thread.sleep(4000);
-        driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+    }
+
+    @Test (priority = 4)
+    public void FollowAccounts() throws InterruptedException{
+
         for ( int i=1 ; i<k ; i++ ) {
-            driver.findElement(By.cssSelector("button[class='sqdOP  L3NKy   y3zKF     ']")).click();
+            driver.findElement(By.xpath("//button[@class='sqdOP  L3NKy   y3zKF     ']")).click();
             Thread.sleep(500);
             WebElement accountToFollow = driver.findElement(By.xpath("(//div[@class='_7UhW9   xLCgt       qyrsm KV-D4             fDxYl      rWtOq']/div)["+i+"]"));
             accountName = accountToFollow.getText();
@@ -80,32 +69,27 @@ public class Day_5_More_Stable {
         Thread.sleep(3000);
     }
 
-    //@Test(priority = 5)
+    @Test (priority = 5)
     public void directMessage() throws InterruptedException{
-        driver.findElement(By.cssSelector("svg[aria-label='Direct']")).click(); //Click Direct Message icon
+        WebElement directMessageIcon = driver.findElement(By.xpath("//a[@class='xWeGp']"));       //Direct Message icon
+        directMessageIcon.click();               //Click Direct Message icon
         Thread.sleep(500);
-        driver.findElement(By.cssSelector("button[class='sqdOP  L3NKy   y3zKF     ']")).click(); // Click "Send Message" button
+        driver.findElement(By.xpath("//button[@class='sqdOP  L3NKy   y3zKF     ']")).click(); // Click "Send Message" button
         Thread.sleep(500);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         for ( int i=1; i<k ; i++ ) {
-            WebElement SearchAccount = driver.findElement(By.cssSelector("input[name='queryBox']")); //Search Account
+            WebElement SearchAccount = driver.findElement(By.xpath("//input[@name='queryBox']")); //Search Account
             SearchAccount.sendKeys(listOfAccounts.get(i-1) + Keys.ENTER);
             Thread.sleep(1500);
-            driver.findElement(By.cssSelector("button[class='dCJp8 ']")).click(); // Select the account
+            driver.findElement(By.xpath("//button[@class='dCJp8 ']")).click(); // Select the account
             Thread.sleep(500);
-            driver.findElement(By.cssSelector("button[class='sqdOP yWX7d    y3zKF   cB_4K  ']")).click(); // Click "Next" Button
+            driver.findElement(By.xpath("//button[@class='sqdOP yWX7d    y3zKF   cB_4K  ']")).click(); // Click "Next" Button
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
             Thread.sleep(500);
-            driver.findElement(By.cssSelector("div[class='X3a-9']>div>textarea")).sendKeys(message + Keys.ENTER); // Enter the Message and send
+            driver.findElement(By.xpath("//div[@class='X3a-9']/div/textarea")).sendKeys(message + Keys.ENTER); // Enter the Message and send
             driver.navigate().back(); // Come Back
             driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
         }
         driver.navigate().back();
-    }
-
-    //@AfterClass
-    public void tearDown() throws InterruptedException{
-        Thread.sleep(4000);
-        driver.close();
     }
 }
