@@ -17,7 +17,7 @@ public class Before_After_Class {
 
     protected WebDriver driver;
 
-    protected String username = ConfigurationReader.getProprty("username_3");
+    protected String username = ConfigurationReader.getProprty("username_1");
     protected String password = ConfigurationReader.getProprty("password");
 
     public String accountName;
