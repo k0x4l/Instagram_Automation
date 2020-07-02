@@ -64,6 +64,7 @@ public class Day_7_ConfigReader_Properties_Driver extends Before_After_Class {
         for ( int i = 1; i < k; i++ ) {
 
             WebElement searchBar = driver.findElement(By.xpath("//input[@placeholder='Search']"));
+            searchBar.clear();
             searchBar.sendKeys(listOfAccounts.get(i-1) + Keys.ENTER );
 
             WebElement accountToSelect = driver.findElement(By.xpath("//div[@class='fuqBx']/a")); // Select the account

@@ -17,13 +17,14 @@ public class Before_After_Class {
 
     protected WebDriver driver;
 
-    protected String username = ConfigurationReader.getProprty("username_1");
+    protected String username = ConfigurationReader.getProprty("username_3");
     protected String password = ConfigurationReader.getProprty("password");
 
     public String accountName;
     public String message = ConfigurationReader.getProprty("message");
     public ArrayList<String> listOfAccounts = new ArrayList<String>();
-    public int k = 6; //Integer.parseInt(ConfigurationReader.getProprty("k"));
+    public String acoountNumber = ConfigurationReader.getProprty("k");
+    public int k = Integer.parseInt(acoountNumber);
     // index starts with 1. If we want to x account to follow and to send direct message, we have to use x+1
 
 
